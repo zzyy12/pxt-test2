@@ -1003,7 +1003,6 @@ namespace HaodaBit {
     //% weight=95
     //% blockId=oled_drawCircle
     //% block="draw circle with x %x|y %y|r %r"
-    //% icon="\uf1ec" 
     //% shim=OLED::drawCircle
     export function drawCircle(x: number = 6, y: number = 6, r: number = 3): void {
         return;
