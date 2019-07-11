@@ -926,15 +926,15 @@ namespace HaodaBit {
 
     /**
      *Prints Next Line
-     
+     */
     //% blockId=oled_next_line
-    //% block="OLED 画一条线"
+    //% block="OLED 换行"
     //% async
     //% shim=OLED::NextLine
 	//% group="OLED" blockGap=50
     export function nextLine(): void {
         return;
-    }*/
+    }
 
 
     /**
@@ -994,20 +994,7 @@ namespace HaodaBit {
         return;
     }
 
-	    /**
-     * 画圆
-     * @param x x (in pixels)
-     * @param y y (in pixels)
-     * @param r r (in pixels)
-     */
-    //% weight=95
-    //% blockId=oled_drawCircle
-    //% block="draw circle with x %x|y %y|r %r"
-    //% shim=OLED::drawCircle
-    export function drawCircle(x: number = 6, y: number = 6, r: number = 3): void {
-        return;
-    }
-	
+
 	
 
 	
