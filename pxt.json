@@ -9,7 +9,6 @@
     "files": [
         "README.md",
         "main.ts",
-        "enums.d.ts",
 		"main.cpp",
         "ir.cpp",
 		"SSD1306_OLED.cpp",
