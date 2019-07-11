@@ -69,13 +69,7 @@ namespace OLED {
 		oled->display();
 	}
 	
-	//%
-	void drawCircle(int x, int y, int r){
-		oled->drawCircle(x, y, r, WHITE);
 
-			oled->display();
-		
-	}
 
 
     #define printf(...) uBit.serial.printf(__VA_ARGS__)
