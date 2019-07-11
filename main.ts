@@ -980,8 +980,8 @@ namespace HaodaBit {
     }*/
 
     /**
-     * prints a number on the OLED display without a newline
-     * @param number number to display 
+     * prints a number on tthe OLED display without a newline
+     * @param number number o display 
      */
     //% weight=93
     //% blockId=oled_print_number
@@ -994,7 +994,20 @@ namespace HaodaBit {
         return;
     }
 
-	
+	    /**
+     * 画圆
+     * @param x x (in pixels)
+     * @param y y (in pixels)
+     * @param r r (in pixels)
+     */
+    //% weight=95
+    //% blockId=oled_drawCircle
+    //% block="draw circle with x %x|y %y|r %r"
+    //% icon="\uf1ec" 
+    //% shim=OLED::drawCircle
+    export function drawCircle(x: number = 6, y: number = 6, r: number = 3): void {
+        return;
+    }
 	
 	
 
