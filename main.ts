@@ -1008,6 +1008,150 @@ namespace HaodaBit {
         return;
     }*/
 	
+	    //% weight=95
+    //% blockId=oled_drawCircle
+    //% block="画圆 x %x|y %y|r %r"
+    //% shim=OLED::drawCircle
+	//% group="OLED" blockGap=50
+    export function drawCircle(x: number = 6, y: number = 6, r: number = 3): void {
+        return;
+    }
+
+    /**
+     * 填充圆
+     * @param x x (in pixels)
+     * @param y y (in pixels)
+     * @param r r (in pixels)
+     */
+    //% weight=94
+    //% blockId=oled_fillCircle
+    //% block="填充圆 x %x|y %y|r %r"
+    //% shim=OLED::fillCircle
+	//% group="OLED" blockGap=50
+    export function fillCircle(x: number = 6, y: number = 6, r: number = 3): void {
+        return;
+    }
+
+    /**
+     * 画线
+     * @param x0 x0 (in pixels)
+     * @param y0 y0 (in pixels)
+     * @param x1 x1 (in pixels)
+     * @param y1 y1 (in pixels)
+     */
+    //% weight=93
+    //% blockId=oled_drawLine
+    //% block="画线 x0 %x0|y0 %y0|x1 %x1|y1 %y1"
+    //% shim=OLED::drawLine
+	//% group="OLED" blockGap=50
+    export function drawLine(x0: number = 1, y0: number = 1, x1: number = 3, y1: number = 3): void {
+        return;
+    }
+
+    /**
+     * 画矩形
+     * @param x x (in pixels)
+     * @param y y (in pixels)
+     * @param w w (in pixels)
+     * @param h h (in pixels)
+     */
+    //% weight=92
+    //% blockId=oled_drawRect
+    //% block="画矩形 x %x|y %y|w %w|h %h"
+    //% shim=OLED::drawRect
+	//% group="OLED" blockGap=50
+    export function drawRect(x: number = 1, y: number = 1, w: number = 3, h: number = 3): void {
+        return;
+    }
+
+    /**
+     * 填充矩形
+     * @param x x (in pixels)
+     * @param y y (in pixels)
+     * @param w w (in pixels)
+     * @param h h (in pixels)
+     */
+    //% weight=91
+    //% blockId=oled_fillRect
+    //% block="填充矩形 x %x|y %y|w %w|h %h"
+    //% shim=OLED::fillRect
+	//% group="OLED" blockGap=50
+    export function fillRect(x: number = 1, y: number = 1, w: number = 3, h: number = 3): void {
+        return;
+    }
+
+    /**
+     * 画带圆角的矩形
+     * @param x x (in pixels)
+     * @param y y (in pixels)
+     * @param w w (in pixels)
+     * @param h h (in pixels)
+     * @param r r (in pixels)
+    
+    //% weight=90
+    //% blockId=oled_drawRoundRect
+    //% block="draw round rect with x %x|y %y|w %w|h %h|r %r"
+    //% shim=OLED::drawRoundRect
+	//% group="OLED" blockGap=50
+    export function drawRoundRect(x: number = 1, y: number = 1, w: number = 3, h: number = 3, r: number = 2): void {
+        return;
+    } */
+
+    /**
+     * 填充带圆角的矩形
+     * @param x x (in pixels)
+     * @param y y (in pixels)
+     * @param w w (in pixels)
+     * @param h h (in pixels)
+     * @param r r (in pixels)
+     
+    //% weight=89
+    //% blockId=oled_fillRoundRect
+    //% block="fill round rect with x %x|y %y|w %w|h %h|r %r"
+    //% shim=OLED::fillRoundRect
+	//% group="OLED" blockGap=50
+    export function fillRoundRect(x: number = 1, y: number = 1, w: number = 3, h: number = 3, r: number = 2): void {
+        return;
+    }*/
+
+    /**
+     * 画三角形
+     * @param x0 x0 (in pixels)
+     * @param y0 y0 (in pixels)
+     * @param x1 x1 (in pixels)
+     * @param y1 y1 (in pixels)
+     * @param x2 x2 (in pixels)
+     * @param y2 y2 (in pixels)
+     */
+    //% weight=88
+    //% blockId=oled_drawTriangle
+    //% block="画三角形 x0 %x0|y0 %y0|x1 %x1|y1 %y1|x2 %x2|y2 %y2"
+    //% shim=OLED::drawTriangle
+	//% group="OLED" blockGap=50
+    export function drawTriangle(x0: number = 1, y0: number = 1, x1: number = 3, y1: number = 3, x2: number = 1, y2: number = 3): void {
+        return;
+    }
+
+    /**
+     * 填充三角形
+     * @param x0 x0 (in pixels)
+     * @param y0 y0 (in pixels)
+     * @param x1 x1 (in pixels)
+     * @param y1 y1 (in pixels)
+     * @param x2 x2 (in pixels)
+     * @param y2 y2 (in pixels)
+     */
+    //% weight=87
+    //% blockId=oled_fillTriangle
+    //% block="填充三角形 x0 %x0|y0 %y0|x1 %x1|y1 %y1|x2 %x2|y2 %y2"
+    //% shim=OLED::fillTriangle
+	//% group="OLED" blockGap=50
+    export function fillTriangle(x0: number = 1, y0: number = 1, x1: number = 3, y1: number = 3, x2: number = 1, y2: number = 3): void {
+        return;
+    }
+	
+	
+	
 
 	
 
