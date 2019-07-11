@@ -4,11 +4,22 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*"
+		"neopixel": "github:Haohaodada-official/pxt-neopixel#v0.6.12"
     },
     "files": [
         "README.md",
-        "main.ts"
+        "main.ts",
+        "enums.d.ts",
+		"main.cpp",
+        "ir.cpp",
+
+        "ReceiverIR.cpp",
+        "ReceiverIR.h",
+        "RemoteIR.h",
+		"TransmitterIR.cpp",
+        "TransmitterIR.h"
+
+		
     ],
     "testFiles": [
         "test.ts"
