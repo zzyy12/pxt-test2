@@ -14,6 +14,10 @@
 
 Read more at https://makecode.microbit.org/extensions
 
+## License
+
+GNU
+
 ## Supported targets
 
 * for PXT/microbit
