@@ -23,8 +23,9 @@
         "Adafruit_GFX.h",
         "Adafruit_GFX.cpp",
         "Adafruit_GFX_Config.h",
-        "glcdfont.h"
-
+        "glcdfont.h",
+		"_locales/zh/HaodaBit-strings.json"
+HaodaBit-strings
 		
     ],
     "testFiles": [
