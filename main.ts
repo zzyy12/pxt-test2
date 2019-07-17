@@ -1,6 +1,13 @@
+/*
+Riven
+Microbit test2 extension board
+load dependency
+"test22": "file:../pxt-test2"
+dht11 port from MonadnockSystems/pxt-dht11
+rgb pixel port from Microsoft/pxt-neopixel
+*/
 
-
-//% weight=10 color=#CA8EFF icon="\uf013" block="test2"
+//% weight=10 color=#CA8EFF icon="\uf013" 
 //% groups='["Ultrasonic/Mic", "Linefollower", "Environment", "Actuator", "IR", "Mp3", "RGB"]'
 namespace test2 {
 
