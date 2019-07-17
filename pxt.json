@@ -25,7 +25,7 @@
         "Adafruit_GFX.cpp",
         "Adafruit_GFX_Config.h",
         "glcdfont.h",
-		"_locales/zh/test2-strings.json"
+		"_locales\zh\test2-strings.json"
 
 		
     ],
