@@ -922,12 +922,12 @@ namespace test2 {
     }
 	
 	/***/
-    //% blockId="HaodaBit_set_height" block="设置巡线传感器高度 %heights"
+    //% blockId="HaodaBit_set_height" block="设置巡线传感器高度 |%heights"
     //% weight=90
     //% group="Linefollower" weight=50
     export function Lineheight(heights: number): void {
 		
-		let hei = height/8;
+		let hei = heights/8;
 		
 		i2cWrite(N76E003AT20_ADDRESS, 0x03, hei);
 		
