@@ -952,7 +952,7 @@ namespace test2 {
     //% group="Linefollower" weight=50
 	export function readlinead(li: linechooseAD): number { 
 	     let values = i2cRead(N76E003AT20_ADDRESS, li);
-		 return value;
+		 return values;
 
 	}
 	
@@ -961,7 +961,7 @@ namespace test2 {
     //% group="Linefollower" weight=50
 	export function readline(li: linechoose): number { 
 	     let values = i2cRead(N76E003AT20_ADDRESS, li);
-		 return value;
+		 return values;
 
 	}
 	
