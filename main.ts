@@ -937,6 +937,14 @@ namespace test2 {
 
 		i2cWrite(N76E003AT20_ADDRESS, 0x11, heights);
 		
+		i2cWrite(N76E003AT20_ADDRESS, 0x0c, heights);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x0e, heights);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x10, heights);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x12, heights);
+		
 	/**	
 	let hei = heights/16;
 		i2cWrite(N76E003AT20_ADDRESS, 0x03, hei);
