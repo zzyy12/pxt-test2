@@ -896,7 +896,7 @@ namespace test2 {
         }
     }
 	
-	/**
+	/***/
     //% blockId="HaodaBit_set_height" block="设置巡线传感器高度"
     //% weight=90
     //% group="Linefollower" weight=50
@@ -924,7 +924,7 @@ namespace test2 {
 
 
 
-    }*/
+    }
 
 
 	
