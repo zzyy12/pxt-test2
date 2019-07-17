@@ -179,6 +179,28 @@ namespace test2 {
         CCW = -1,
     }
 	
+	export enum linechoose {
+        //% block=R1
+        R1 = 0x19,
+        //% block=R2
+        R2 = 0x16,
+        //% block=L1
+        L1 = 0x14,
+        //% block=L2
+        L2 = 0x13
+    }
+	
+	export enum linechooseAD {
+        //% block=R1
+        R1 = 0x07,
+        //% block=R2
+        R2 = 0x09,
+        //% block=L1
+        L1 = 0x05,
+        //% block=L2
+        L2 = 0x03
+    }
+	
 	export enum Buttondd {
         //% block=0
         IR_BUTTON_0 = 0x0d,
@@ -903,11 +925,10 @@ namespace test2 {
     //% blockId="HaodaBit_set_height" block="设置巡线传感器高度"
     //% weight=90
     //% group="Linefollower" weight=50
-    export function readLine(): void {
+    export function Lineheight(): void {
 		
 		
 		i2cWrite_1(N76E003AT20_ADDRESS, 0x03, N76E003AT20_DATA1, N76E003AT20_DATA2);
-		control.waitMicros(5000);
 		i2cWrite_1(N76E003AT20_ADDRESS, 0x05, N76E003AT20_DATA1, N76E003AT20_DATA2);
 
 		i2cWrite_1(N76E003AT20_ADDRESS, 0x07, N76E003AT20_DATA1, N76E003AT20_DATA2);
@@ -925,6 +946,26 @@ namespace test2 {
 
 
     }
+	
+	//% blockId="HaodaBit_read_linead" block="读巡线传感器ad %li"
+    //% weight=90
+    //% group="Linefollower" weight=50
+	export function readlinead(li: linechooseAD): number { 
+	     let values = i2cRead(N76E003AT20_ADDRESS, li);
+		 return value;
+
+	}
+	
+	//% blockId="HaodaBit_read_line" block="读巡线传感器 %li"
+    //% weight=90
+    //% group="Linefollower" weight=50
+	export function readline(li: linechoose): number { 
+	     let values = i2cRead(N76E003AT20_ADDRESS, li);
+		 return value;
+
+	}
+	
+	
 
 
 	
