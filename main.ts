@@ -927,22 +927,23 @@ namespace test2 {
     //% group="Linefollower" weight=50
     export function Lineheight(heights: number): void {
 		
+		let hei = height/8;
 		
-		i2cWrite(N76E003AT20_ADDRESS, 0x03, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x03, hei);
 		
-		i2cWrite(N76E003AT20_ADDRESS, 0x05, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x05, hei);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x07, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x07, hei);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x09, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x09, hei);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x13, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x13, hei);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x14, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x14, hei);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x19, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x19, hei);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x16, heights);
+		i2cWrite(N76E003AT20_ADDRESS, 0x16, hei);
 
 
     }
