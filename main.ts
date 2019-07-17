@@ -58,7 +58,7 @@ namespace test2 {
     const TCS34725_COMMAND_BIT = 0x80
     const TCS34725_ADDRESS = 0x29
 	
-	const N76E003AT20_ADDRESS = 0xA4
+	const N76E003AT20_ADDRESS = 0x52
 	const N76E003AT20_DATA1 = 0x16
 	const N76E003AT20_DATA2 = 0x08
 
@@ -268,13 +268,7 @@ namespace test2 {
         pins.i2cWriteBuffer(addr, buf)
     }
 	
-	function i2cWrite_1(addr: number, reg: number, value: number, value1: number) {
-        let buf = pins.createBuffer(3)
-        buf[0] = reg
-        buf[1] = value
-		buf[2] = value1
-        pins.i2cWriteBuffer(addr, buf)
-    }
+
 
     function i2cCmd(addr: number, value: number) {
         let buf = pins.createBuffer(1)
@@ -896,18 +890,24 @@ namespace test2 {
         }
     }
 	
+	
+	function i2cWrite_1(addr: number, reg: number, value: number, value1: number) {
+        let buf = pins.createBuffer(3)
+        buf[0] = reg
+        buf[1] = value
+		buf[2] = value1
+        pins.i2cWriteBuffer(addr, buf)
+    }
+	
 	/***/
     //% blockId="HaodaBit_set_height" block="设置巡线传感器高度"
     //% weight=90
     //% group="Linefollower" weight=50
     export function readLine(): void {
 		
-
-	
 		
 		i2cWrite_1(N76E003AT20_ADDRESS, 0x03, N76E003AT20_DATA1, N76E003AT20_DATA2);
-		
-
+		control.waitMicros(5000);
 		i2cWrite_1(N76E003AT20_ADDRESS, 0x05, N76E003AT20_DATA1, N76E003AT20_DATA2);
 
 		i2cWrite_1(N76E003AT20_ADDRESS, 0x07, N76E003AT20_DATA1, N76E003AT20_DATA2);
