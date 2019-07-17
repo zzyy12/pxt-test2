@@ -193,7 +193,7 @@ namespace test2 {
         //% blockId="CW" block="CW"
         CW = 1,
         //% blockId="CCW" block="CCW"
-        CCW = -1,
+        CCW = -1
     }
 
     export enum BBLineSensor {
