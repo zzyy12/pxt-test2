@@ -928,7 +928,7 @@ namespace test2 {
     export function Lineheight(heights: number): void {
 		
 		
-
+/**	
 		i2cWrite(N76E003AT20_ADDRESS, 0x0b, heights);
 
 		i2cWrite(N76E003AT20_ADDRESS, 0x0d, heights);
@@ -936,26 +936,26 @@ namespace test2 {
 		i2cWrite(N76E003AT20_ADDRESS, 0x0f, heights);
 
 		i2cWrite(N76E003AT20_ADDRESS, 0x11, heights);
-
-		
-	/**	
-	let hei = heights/16;
-		i2cWrite(N76E003AT20_ADDRESS, 0x03, hei);
-		
-		i2cWrite(N76E003AT20_ADDRESS, 0x05, hei);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x07, hei);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x09, hei);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x13, hei);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x14, hei);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x19, hei);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x16, hei);
 */
+		
+	
+	
+		i2cWrite(N76E003AT20_ADDRESS, 0x03, 0x16);
+		
+		i2cWrite(N76E003AT20_ADDRESS, 0x05, 0x16);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x07, 0x16);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x09, 0x16);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x13, 0x16);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x14, 0x16);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x19, 0x16);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x16, 0x16);
+
 
     }
 	
