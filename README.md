@@ -16,7 +16,7 @@ Read more at https://makecode.microbit.org/extensions
 
 ## License
 
-GNU
+MIT
 
 ## Supported targets
 
