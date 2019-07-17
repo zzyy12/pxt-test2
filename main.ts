@@ -8,7 +8,7 @@ rgb pixel port from Microsoft/pxt-neopixel
 */
 
 //% weight=10 color=#CA8EFF icon="\uf013" 
-//% groups='["Ultrasonic/Mic", "Linefollower", "Environment", "Actuator", "IR", "Mp3", "RGB"]'
+//% groups='["Ultrasonic", "Linefollower", "Environment", "Actuator", "IR", "Mp3", "RGB"]'
 namespace test2 {
 
     const MM32_ADDRESS = 0x40
@@ -51,8 +51,9 @@ namespace test2 {
 
     const BYG_CHD_L = 2047
     const BYG_CHD_H = 4095
-
-    const TCS34725IntegrationTime = 0xEB
+	
+	
+	const TCS34725IntegrationTime = 0xEB
     const TCS34725Gain = 0x01
     const TCS34725_COMMAND_BIT = 0x80
     const TCS34725_ADDRESS = 0x29
@@ -61,15 +62,7 @@ namespace test2 {
 	const N76E003AT20_DATA1 = 0x16
 	const N76E003AT20_DATA2 = 0x08
 
-	
-	
-
     // Auto-generated. Do not edit.
-
-
-
-
-
 
 
 
@@ -82,8 +75,9 @@ namespace test2 {
         DigitalPin.P16
 
     ]
-
-    const PortAnalog = [
+	
+	
+	const PortAnalog = [
         AnalogPin.P0,
         AnalogPin.P1,
         AnalogPin.P2,
@@ -101,17 +95,19 @@ namespace test2 {
         SerialPin.P16
     ]
 
+
     export enum Ports {
         P0 = 0,
         P1 = 1,
         P2 = 2,
         P8 = 3,
         P12 = 4,
-        P16 = 5,
+        P16 = 5
 
     }
-
-    export enum Ports1 {
+	
+	
+	export enum Ports1 {
         P0 = 0,
         P1 = 1,
         P2 = 2
@@ -127,31 +123,63 @@ namespace test2 {
         Pins.P16
 
     ]
-
-
-
-
-    export enum DHT11Type {
-        //% block=temperature(°C)
+	
+	export enum DHT11Type {
+        //% block=温度(°C)
         TemperatureC = 0,
-        //% block=temperature(°F)
+        //% block=温度(°F)
         TemperatureF = 1,
-        //% block=humidity
+        //% block=湿度
         Humidity = 2
     }
-
-    export enum PrevNext {
-        //% block=play
+	
+	export enum PrevNext {
+        //% block=播放
         play = 0x0d,
-        //% block=stop
+        //% block=停止
         stop = 0x0e,
-        //% block=next
+        //% block=下一首
         next = 0x01,
-        //% block=prev
+        //% block=上一首
         prev = 0x02
     }
-
-    export enum Buttondd {
+	
+	export enum Creadcolor {
+        //% block=R值
+        RR = 0,
+        //% block=G值
+        GG = 1,
+        //% block=B值
+        BB = 2
+    }
+	
+    export enum encodingType {
+        NEC
+    }
+	
+	export enum BMP280_I2C_ADDRESS{
+    //% block="0x76"
+    ADDR_0x76 = 0x76,
+    //% block="0x77"
+    ADDR_0x77 = 0x77
+   }
+   export enum Motors {
+        //%blockId=HaodaBit_motordriver_motor_one
+        //% block="MA"
+        MA = 0x1,
+        //%blockId=HaodaBit_motordriver_motor_two
+        //% block="MB"
+        MB = 0x2
+    }
+	
+   export enum Dir {
+        //% blockId="CW" block="正转"
+        CW = 1,
+        //% blockId="CCW" block="反转"
+        CCW = -1,
+    }
+	
+	export enum Buttondd {
         //% block=0
         IR_BUTTON_0 = 0x0d,
         //% block=1
@@ -174,13 +202,13 @@ namespace test2 {
         IR_BUTTON_9 = 0x0a,
         //% block=OK
         IR_BUTTON_OK = 0x15,
-        //% block=上
+        //% block=UP
         IR_BUTTON_UP = 0x11,
-        //% block=下
+        //% block=DOWM
         IR_BUTTON_DOWN = 0x19,
-        //% block=左
+        //% block=LEFT
         IR_BUTTON_LEFT = 0x14,
-        //% block=右
+        //% block=RIGHT
         IR_BUTTON_RIGHT = 0x16,
         //% block=*
         IR_BUTTON_SPARK = 0x0c,
@@ -189,53 +217,26 @@ namespace test2 {
 
     }
 
-    export enum Dir {
-        //% blockId="CW" block="CW"
-        CW = 1,
-        //% blockId="CCW" block="CCW"
-        CCW = -1
-    }
 
-    export enum BBLineSensor {
-        //% block="左侧"
-        Left,
-        //% block="右侧"
-        Right
-    }
-
-
-    export enum Creadcolor {
-        //% block=red
-        RR = 0,
-        //% block=green
-        GG = 1,
-        //% block=blue
-        BB = 2
-    }
-	export enum encodingType {
-        NEC
-    }
+	let distanceBuf = 0;
+	let alreadyInit = 0;
+	let dht11Temp = -1;
+    let dht11Humi = -1;
+	let tcs34725Initialised = false
+	let initddd = false;
+	let irLed = AnalogPin.P16;
+	let pwmPeriod = 26;
+    pins.analogWritePin(irLed, 0);
+    pins.analogSetPeriod(irLed, pwmPeriod);
+	let BMP280_I2C_ADDR = BMP280_I2C_ADDRESS.ADDR_0x76;
+	let initialized = false
 	
-	export enum testline{
-		ss = 0x01,
-		dd = 0x00
-	}
-	
-	export enum BMP280_I2C_ADDRESS{
-    //% block="0x76"
-    ADDR_0x76 = 0x76,
-    //% block="0x77"
-    ADDR_0x77 = 0x77
-}		
-	
-
-
-    //% shim=HaodaBit::dht11Update
+	//% shim=HaodaBit::dht11Update
     function dht11Update(pin: number): number {
         return 999;
     }
-
-    //% advanced=true shim=Mbit_IR::initIR
+	
+	//% advanced=true shim=Mbit_IR::initIR
     function initIR(pin: Pins): void {
         return
     }
@@ -257,58 +258,21 @@ namespace test2 {
         alreadyInit = 1
     }
 	
-	let irLed = AnalogPin.P16;
-    let pwmPeriod = 26;
-    pins.analogWritePin(irLed, 0);
-    pins.analogSetPeriod(irLed, pwmPeriod);
-    let initddd = false;
-	let BMP280_I2C_ADDR = BMP280_I2C_ADDRESS.ADDR_0x76;
 	
-	function transmitBit(highTime: number, lowTime: number): void {
-        pins.analogWritePin(irLed, 512);
-        control.waitMicros(highTime);
-        pins.analogWritePin(irLed, 0);
-        control.waitMicros(lowTime);
+	
+	
+	function i2cWrite(addr: number, reg: number, value: number) {
+        let buf = pins.createBuffer(2)
+        buf[0] = reg
+        buf[1] = value
+        pins.i2cWriteBuffer(addr, buf)
     }
-
-    /**
- * Well known colors for a NeoPixel strip
- */
-
-
-    let dht11Temp = -1;
-    let dht11Humi = -1;
-    let alreadyInit = 0;
-
-
-
-
-    export enum Motors {
-        //%blockId=HaodaBit_motordriver_motor_one
-        //% block="MA"
-        MA = 0x1,
-        //%blockId=HaodaBit_motordriver_motor_two
-        //% block="MB"
-        MB = 0x2
-    }
-
-    let distanceBuf = 0;
-    let initialized = false
-    let tcs34725Initialised = false
-	let I2C_WRITE = 0;
 	
 	function i2cWrite_1(addr: number, reg: number, value: number, value1: number) {
         let buf = pins.createBuffer(3)
         buf[0] = reg
         buf[1] = value
 		buf[2] = value1
-        pins.i2cWriteBuffer(addr, buf)
-    }
-
-    function i2cWrite(addr: number, reg: number, value: number) {
-        let buf = pins.createBuffer(2)
-        buf[0] = reg
-        buf[1] = value
         pins.i2cWriteBuffer(addr, buf)
     }
 
@@ -324,100 +288,12 @@ namespace test2 {
         return val;
     }
 
-    function MM32DDDD(): void {
-        i2cWrite(MM32_ADDRESS, MODE1, 0x00)
-        setFreq(50);
-        initialized = true
-    }
 
 
 
-    function setFreq(freq: number): void {
-        // Constrain the frequency
-        let prescaleval = 25000000;
-        prescaleval /= 4096;
-        prescaleval /= freq;
-        prescaleval -= 1;
-        let prescale = prescaleval;//Math.floor(prescaleval + 0.5);
-        let oldmode = i2cRead(MM32_ADDRESS, MODE1);
-        let newmode = (oldmode & 0x7F) | 0x10; // sleep
-        i2cWrite(MM32_ADDRESS, MODE1, newmode); // go to sleep
-        i2cWrite(MM32_ADDRESS, PRESCALE, prescale); // set the prescaler
-        i2cWrite(MM32_ADDRESS, MODE1, oldmode);
-        control.waitMicros(5000);
-        i2cWrite(MM32_ADDRESS, MODE1, oldmode | 0xa1);
-    }
-
-    function setPwm(channel: number, on: number, off: number): void {
-        if (channel < 0 || channel > 15)
-            return;
-
-        let buf = pins.createBuffer(5);
-        buf[0] = LED0_ON_L + 4 * channel;
-        buf[1] = on & 0xff;
-        buf[2] = (on >> 8) & 0xff;
-        buf[3] = off & 0xff;
-        buf[4] = (off >> 8) & 0xff;
-        pins.i2cWriteBuffer(MM32_ADDRESS, buf);
-    }
-
-    /**
-     * Runs the motor at the given speed
-     */
-    ///% weight=90
-    //% blockId=HaodaBit_MotorRun block="Motor|%index|dir|%Dir|speed|%speed"
-    //% speed.min=0 speed.max=255
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
-    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
-    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function MotorRun(index: Motors, direction: Dir, speed: number): void {
-        if (!initialized) {
-            MM32DDDD()
-        }
-        speed = speed * 16 * direction; // map 255 to 4096
-        if (speed >= 4096) {
-            speed = 4095
-        }
-        if (speed <= -4096) {
-            speed = -4095
-        }
-        if (index > 4 || index <= 0)
-            return
-        let pn = (4 - index) * 2
-        let pp = (4 - index) * 2 + 1
-        if (speed >= 0) {
-            setPwm(pp, 0, speed)
-            setPwm(pn, 0, 0)
-        } else {
-            setPwm(pp, 0, 0)
-            setPwm(pn, 0, -speed)
-        }
-    }
-
-    //% weight=20
-    //% blockId=HaodaBit_motorStop block="Motor stop|%index"
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2 
-    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function motorStop(index: Motors) {
-        setPwm((4 - index) * 2, 0, 0);
-        setPwm((4 - index) * 2 + 1, 0, 0);
-    }
-
-    /**
-    * Stop all motors
-    */
+    //% blockId=HaodaBit_ultrasonic block="超声波|管脚 %pin"
     //% weight=10
-    //% blockId=HaodaBit_motorStopAll block="Motor Stop All"
-    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function motorStopAll(): void {
-        for (let idx = 1; idx <= 2; idx++) {
-            motorStop(idx);
-        }
-    }
-
-    //% blockId=HaodaBit_ultrasonic block="Ultrasonic|port %pin"
-    //% weight=10
-    //% group="Ultrasonic/Mic" blockGap=50
+    //% group="Ultrasonic" blockGap=50
     export function Ultrasonic(pin: Ports): number {
 
         // send pulse
@@ -441,30 +317,24 @@ namespace test2 {
 
         return Math.floor(ret * 10 / 6 / 58);
     }
-    //% blockId=HaodaBit_motor_servo block="Servo|%pin|degree|%degree"
+	
+	//% blockId=IR_read block="读红外的值在 %pin"
     //% weight=100
-    //% degree.min=0 degree.max=180
-    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function servo(pin: Ports, degree: number): void {
-
-        let port = PortAnalog[pin]
-
-        let value = (0.5 + degree / 90) * 1000
-        pins.servoSetPulse(port, value)
+	//% group="IR" weight=50
+    export function IR_read(pin: Ports): number {
+        haodabitInit(pin)
+        return getParam()
     }
 
-    //% blockId=HaodaBit_LM35_server block="read lm35|port %pin"
+    //% blockId=IR_KEY block="红外按键| %readkey"
     //% weight=100
-    //% group="Environment" blockGap=50
-    export function server_lm35(pin: Ports1): number {
-
-        let port = PortAnalog[pin]
-        let vas = pins.analogReadPin(port)
-        let value = (82.5 * vas) >> 8
-        return value;
+	//% group="IR" weight=50
+    export function key_read(readkey: Buttondd): number {
+        return readkey;
     }
-
-    //% blockId=HaodaBit_dht11 block="DHT11|port %port|type %readtype"
+	
+	
+	//% blockId=HaodaBit_dht11 block="读 DHT11| %readtype|在 %port"
     //% weight=60
     //% group="Environment" blockGap=50
     export function DHT11(readtype: DHT11Type, port: Ports1): number {
@@ -489,16 +359,90 @@ namespace test2 {
 
 
     }
-
-    function calcSum(buf: Buffer, start: number, end: number): number {
-        let sum = 0;
-        for (let i = start; i <= end; i++) {
-            sum += buf[i];
-        }
-        return sum;
+	
+		/***/
+	//% blockId=oled_init_terminal
+    //% weight=100
+    //% block="初始化 OLED 高度 %height|宽度 %width"
+    //% shim=OLED::init_terminal
+	//% group="OLED" blockGap=50
+	
+    export function init(height: number = 64, width: number = 128): void {
+        return;
     }
 
-    //% blockId=HaodaBit_mp3_connect block="MP3 init|port %port"
+    /**
+     *Prints Next Line
+     */
+    //% blockId=oled_next_line
+    //% block="OLED 换行"
+    //% async
+    //% shim=OLED::NextLine
+	//% group="OLED" blockGap=50
+    export function nextLine(): void {
+        return;
+    }
+
+
+    /**
+     * clears the screen.
+     */
+    //% blockId=oled_clear_screen
+    //% block="OLED 清屏"
+    //% icon="\uf1ec" 
+    //% shim=OLED::clearDisplay
+	//% group="OLED" blockGap=50
+    export function clear(): void {
+        return;
+    }
+     /**
+      * prints a string on the OLED display
+      * @param text text to display, eg: "Hello, OLED!"
+      */
+     //% weight=92 blockGap=8
+     //% block="OLED显示字符串 %text" 
+     //% async
+     //% blockId=oled_print_stringNoNewLine
+     //% icon="\uf1ec"
+     //% shim=OLED::showStringNoNewLine
+	 //% group="OLED" blockGap=50
+     export function showStringNoNewLine(text: string): void {
+        console.log("display: " + text);
+        return;
+    }
+     /**
+      * prints a string on the OLED display
+      * @param text text to display, eg: "Hello, OLED!"
+      
+     //% weight=94 blockGap=8
+     //% block="show|string %text" 
+     //% async
+     //% blockId=oled_print_stringWithNewLine
+     //% icon="\uf1ec"
+     //% shim=OLED::showStringWithNewLine
+	 //% group="OLED" blockGap=50
+     export function showStringWithNewLine(text: string): void {
+        console.log("display: " + text);
+        return;
+    }*/
+
+    /**
+     * prints a number on tthe OLED display without a newline
+     * @param number number o display 
+     */
+    //% weight=93
+    //% blockId=oled_print_number
+    //% block="OLED显示数字 %number" 
+    //% async 
+    //% shim=OLED::showNumberWithoutNewLine
+	//% group="OLED" blockGap=50
+    export function showNumberNoNewLine(number: number): void {
+        console.log("display: " + number);
+        return;
+    }
+	
+	
+	//% blockId=HaodaBit_mp3_connect block="MP3 初始化|在 %port"
     //% group="MP3" weight=39
     export function MP3Connect(port: Ports): void {
         let pin = PortSerial[port]
@@ -521,7 +465,7 @@ namespace test2 {
         serial.writeBuffer(buf)
     }
 
-    //% blockId=HaodaBit_mp3_volumn block="MP3_volume_set|%volumn"
+    //% blockId=HaodaBit_mp3_volumn block="MP3 播放音量|%volumn"
     //% volumn.min=0 volumn.max=30
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     //% group="MP3" weight=37
@@ -538,7 +482,7 @@ namespace test2 {
         serial.writeBuffer(buf)
     }
 
-    //% blockId=HaodaBit_mp3_playindex block="MP3 play|index %index"
+    //% blockId=HaodaBit_mp3_playindex block="MP3 播放曲目|%index"
     //% group="MP3" weight=37
     export function MP3PlayIndex(index: number): void {
         let buf = pins.createBuffer(8);
@@ -555,51 +499,32 @@ namespace test2 {
         buf[7] = 0xef;
         serial.writeBuffer(buf)
     }
-/**
-    //% blockId="HaodaBit_set_height" block="设置巡线传感器高度"
-    //% weight=90
-    //% group="Linefollower" weight=50
-    export function readLine(): void {
-		
-        if (sensor == BBLineSensor.Right) {
-            return pins.digitalReadPin(DigitalPin.P19);
-        } else if (sensor == BBLineSensor.Left) {
-            return pins.digitalReadPin(DigitalPin.P20);
-        } else {
-            return 0;
-        }
 	
-		
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x03, N76E003AT20_DATA1, N76E003AT20_DATA2);
-		
+	//% blockId=HaodaBit_motor_servo block="舵机|%pin|转动角度|%degree"
+    //% weight=100
+    //% degree.min=0 degree.max=180
+    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function servo(pin: Ports, degree: number): void {
 
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x05, N76E003AT20_DATA1, N76E003AT20_DATA2);
+        let port = PortAnalog[pin]
 
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x07, N76E003AT20_DATA1, N76E003AT20_DATA2);
+        let value = (0.5 + degree / 90) * 1000
+        pins.servoSetPulse(port, value)
+    }
+	
+	//% blockId=HaodaBit_LM35_server block="读取LM35温度在|%pin"
+    //% weight=100
+    //% group="Environment" blockGap=50
+    export function server_lm35(pin: Ports1): number {
 
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x09, N76E003AT20_DATA1, N76E003AT20_DATA2);
-
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x13, N76E003AT20_DATA1, N76E003AT20_DATA2);
-
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x14, N76E003AT20_DATA1, N76E003AT20_DATA2);
-
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x19, N76E003AT20_DATA1, N76E003AT20_DATA2);
-
-		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x16, N76E003AT20_DATA1, N76E003AT20_DATA2);
-
-
-
-    }*/
-/**	
-	 //% blockId="HaodaBit_read_line" block="读巡线传感器2"
-    //% weight=90
-    //% group="Linefollower" weight=50
-	export function readLine(): void {
-		i2cRead(N76E003AT20_ADDRESS, 
-	}
-*/	
-
-    function TCS34725_setIntegrationTime() {
+        let port = PortAnalog[pin]
+        let vas = pins.analogReadPin(port)
+        let value = (82.5 * vas) >> 8
+        return value;
+    }
+	
+	
+	function TCS34725_setIntegrationTime() {
         if (!tcs34725Initialised) { TCS34725_begin(); }
 
         /* Update the timing register */
@@ -644,16 +569,6 @@ namespace test2 {
     }
 
 
-    function TCS34725_getRGBC(r: number, g: number, b: number, c: number): void {
-        if (!tcs34725Initialised) { TCS34725_begin(); }
-
-        c = i2cRead(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | 0x14);
-        r = i2cRead(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | 0x16);
-        g = i2cRead(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | 0x18);
-        b = i2cRead(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | 0x1A);
-        basic.pause(50);
-    }
-
 
     function TCS34725_LOCK(): void {
         let r = i2cRead(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | 0x00);
@@ -694,44 +609,23 @@ namespace test2 {
 	
 
 
-    //% blockId=HaodaBit_TCS34725 block="read color|port %pn"
+    //% blockId=HaodaBit_TCS34725 block="读取颜色传感器 %pn"
     //% weight=100
     //% group="Environment" blockGap=50
     export function H_TCS34725(pn: Creadcolor): number {
         let num = TCS34725_readRGBC(pn);
         return num;
     }
-
-    //% blockId=IR_read block="read IR %pin"
-    //% weight=100
-	//% group="IR" weight=50
-    export function IR_read(pin: Ports): number {
-        haodabitInit(pin)
-        return getParam()
-    }
-
-    //% blockId=IR_KEY block="IR buttons| %readkey"
-    //% weight=100
-	//% group="IR" weight=50
-    export function key_read(readkey: Buttondd): number {
-        return readkey;
+	
+	
+    function transmitBit(highTime: number, lowTime: number): void {
+        pins.analogWritePin(irLed, 512);
+        control.waitMicros(highTime);
+        pins.analogWritePin(irLed, 0);
+        control.waitMicros(lowTime);
     }
 	
-	    function sendStart(): void {
-        transmitBit(9000, 4500);
-    }
-
-    function sendStop(): void {
-        transmitBit(560, 0);
-    }
-
-    function sendLow(): void {
-        transmitBit(560, 560);
-    }
-
-    function sendHigh(): void {
-        transmitBit(560, 1690);
-    }
+	
 
     function encode(myCode: number, bits: number, trueHigh: number, trueLow: number, falseHigh: number, falseLow: number): void {
         const MESSAGE_BITS = bits;
@@ -776,25 +670,11 @@ namespace test2 {
         }
     }
 	
-	    /**
-     *  set the infrared LED pin.
-     
-    //% blockId=HaodaBit_setIR_pin block="设置红外发送在 %port" 
-    //% weight=90
-	//% group="IR" weight=50
-
-    export function setIR_pin(port: Ports): void {
-		let portss = PortAnalog[port]
-        irLed = portss;
-        pins.analogWritePin(irLed, 0);
-        pins.analogSetPeriod(irLed, pwmPeriod);
-        initddd = true;
-    }
-	*/
+	
 	 /**
      * send message from IR LED. You must set the message encoding type, send how many times, and the message.
      */
-    //% blockId=HaodaBit_sendMyMessage block="IR send message at: %msg|, %times| times,port %port"
+    //% blockId=HaodaBit_sendMyMessage block="红外发送数据: %msg|共%times| 次在 %port"
     //% weight=100
 	//% group="IR" weight=50
   export function sendMyMessage(msg: number, times: number, port: Ports): void {
@@ -875,9 +755,9 @@ namespace test2 {
     /**
      * get pressure
      */
-    //% blockId="BMP280_GET_PRESSURE" block="BMP280 get pressure"
+    //% blockId="BMP280_GET_PRESSURE" block="BMP280 获取气压值"
     //% weight=80
-	//% group="Environment" blockGap=50
+	//% group="BMP280" blockGap=50
     export function pressure(): number {
         get();
         return P;
@@ -886,9 +766,9 @@ namespace test2 {
     /**
      * get temperature
     */
-    //% blockId="BMP280_GET_TEMPERATURE" block="BMP280 get temperature"
+    //% blockId="BMP280_GET_TEMPERATURE" block="BMP280 获取温度值"
     //% weight=80
-	//% group="Environment" blockGap=50
+	//% group="BMP280" blockGap=50
     export function temperature(): number {
         get();
         return T;
@@ -897,9 +777,9 @@ namespace test2 {
     /**
      * power on
     */
-    //% blockId="BMP280_POWER_ON" block="BMP280 power On"
+    //% blockId="BMP280_POWER_ON" block="BMP280 打开"
     //% weight=80 
-	//% group="Environment" blockGap=50
+	//% group="BMP280" blockGap=50
     export function PowerOn() {
         setreg(0xF4, 0x2F)
     } 
@@ -907,9 +787,9 @@ namespace test2 {
     /**
      * power off
      */
-    //% blockId="BMP280_POWER_OFF" block="BMP280 power Off"
+    //% blockId="BMP280_POWER_OFF" block="BMP280 关闭"
     //% weight=80 
-	//% group="Environment" blockGap=50
+	//% group="BMP280" blockGap=50
     export function PowerOff() {
         setreg(0xF4, 0)
     }
@@ -917,91 +797,134 @@ namespace test2 {
     /**
      * set I2C address
      */
-    //% blockId="BMP280_SET_ADDRESS" block="BMP280 set address %addr"
+    //% blockId="BMP280_SET_ADDRESS" block="BMP280设置地址 %addr"
     //% weight=80
-	//% group="Environment" blockGap=50
+	//% group="BMP280" blockGap=50
     export function Address(addr: BMP280_I2C_ADDRESS) {
         BMP280_I2C_ADDR = addr
     }
 	
-	//% blockId=oled_init_terminal
-    //% weight=100
-    //% block="initialize OLED with height %height|width %width"
-    //% shim=OLED::init_terminal
-	//% group="OLED" blockGap=50
-    export function init(height: number = 64, width: number = 128): void {
-        return;
+	
+	function MM32DDDD(): void {
+        i2cWrite(MM32_ADDRESS, MODE1, 0x00)
+        setFreq(50);
+        initialized = true
+    }
+
+
+
+    function setFreq(freq: number): void {
+        // Constrain the frequency
+        let prescaleval = 25000000;
+        prescaleval /= 4096;
+        prescaleval /= freq;
+        prescaleval -= 1;
+        let prescale = prescaleval;//Math.floor(prescaleval + 0.5);
+        let oldmode = i2cRead(MM32_ADDRESS, MODE1);
+        let newmode = (oldmode & 0x7F) | 0x10; // sleep
+        i2cWrite(MM32_ADDRESS, MODE1, newmode); // go to sleep
+        i2cWrite(MM32_ADDRESS, PRESCALE, prescale); // set the prescaler
+        i2cWrite(MM32_ADDRESS, MODE1, oldmode);
+        control.waitMicros(5000);
+        i2cWrite(MM32_ADDRESS, MODE1, oldmode | 0xa1);
+    }
+
+    function setPwm(channel: number, on: number, off: number): void {
+        if (channel < 0 || channel > 15)
+            return;
+
+        let buf = pins.createBuffer(5);
+        buf[0] = LED0_ON_L + 4 * channel;
+        buf[1] = on & 0xff;
+        buf[2] = (on >> 8) & 0xff;
+        buf[3] = off & 0xff;
+        buf[4] = (off >> 8) & 0xff;
+        pins.i2cWriteBuffer(MM32_ADDRESS, buf);
     }
 
     /**
-     *Prints Next Line
+     * Runs the motor at the given speed
      */
-    //% blockId=oled_next_line
-    //% block="insert newline"
-    //% async
-    //% shim=OLED::NextLine
-	//% group="OLED" blockGap=50
-    export function nextLine(): void {
-        return;
+    ///% weight=90
+    //% blockId=HaodaBit_MotorRun block="电机|%index|方向|%Dir|速度|%speed"
+    //% speed.min=0 speed.max=255
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
+    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
+    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function MotorRun(index: Motors, direction: Dir, speed: number): void {
+        if (!initialized) {
+            MM32DDDD()
+        }
+        speed = speed * 16 * direction; // map 255 to 4096
+        if (speed >= 4096) {
+            speed = 4095
+        }
+        if (speed <= -4096) {
+            speed = -4095
+        }
+        if (index > 4 || index <= 0)
+            return
+        let pn = (4 - index) * 2
+        let pp = (4 - index) * 2 + 1
+        if (speed >= 0) {
+            setPwm(pp, 0, speed)
+            setPwm(pn, 0, 0)
+        } else {
+            setPwm(pp, 0, 0)
+            setPwm(pn, 0, -speed)
+        }
     }
 
+    //% weight=20
+    //% blockId=HaodaBit_motorStop block="电机停止|%index"
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2 
+    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function motorStop(index: Motors) {
+        setPwm((4 - index) * 2, 0, 0);
+        setPwm((4 - index) * 2 + 1, 0, 0);
+    }
 
     /**
-     * clears the screen.
-     */
-    //% blockId=oled_clear_screen
-    //% block="clear OLED display"
-    //% icon="\uf1ec" 
-    //% shim=OLED::clearDisplay
-	//% group="OLED" blockGap=50
-    export function clear(): void {
-        return;
+    * Stop all motors
+    */
+    //% weight=10
+    //% blockId=HaodaBit_motorStopAll block="停止所有电机"
+    //% group="Actuator" name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function motorStopAll(): void {
+        for (let idx = 1; idx <= 2; idx++) {
+            motorStop(idx);
+        }
     }
-     /**
-      * prints a string on the OLED display
-      * @param text text to display, eg: "Hello, OLED!"
-      */
-     //% weight=92 blockGap=8
-     //% block="show|string %text" 
-     //% async
-     //% blockId=oled_print_stringNoNewLine
-     //% icon="\uf1ec"
-     //% shim=OLED::showStringNoNewLine
-	 //% group="OLED" blockGap=50
-     export function showStringNoNewLine(text: string): void {
-        console.log("display: " + text);
-        return;
-    }
-     /**
-      * prints a string on the OLED display
-      * @param text text to display, eg: "Hello, OLED!"
-      
-     //% weight=94 blockGap=8
-     //% block="show|string %text" 
-     //% async
-     //% blockId=oled_print_stringWithNewLine
-     //% icon="\uf1ec"
-     //% shim=OLED::showStringWithNewLine
-	 //% group="OLED" blockGap=50
-     export function showStringWithNewLine(text: string): void {
-        console.log("display: " + text);
-        return;
+	
+	/**
+    //% blockId="HaodaBit_set_height" block="设置巡线传感器高度"
+    //% weight=90
+    //% group="Linefollower" weight=50
+    export function readLine(): void {
+		
+
+	
+		
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x03, N76E003AT20_DATA1, N76E003AT20_DATA2);
+		
+
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x05, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x07, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x09, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x13, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x14, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x19, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS | I2C_WRITE, 0x16, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+
+
     }*/
-
-    /**
-     * prints a number on tthe OLED display without a newline
-     * @param number number o display 
-     */
-    //% weight=93
-    //% blockId=oled_print_number
-    //% block="show|number %number" 
-    //% async 
-    //% shim=OLED::showNumberWithoutNewLine
-	//% group="OLED" blockGap=50
-    export function showNumberNoNewLine(number: number): void {
-        console.log("display: " + number);
-        return;
-    }
 
 
 	
