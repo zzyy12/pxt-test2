@@ -922,27 +922,27 @@ namespace test2 {
     }
 	
 	/***/
-    //% blockId="HaodaBit_set_height" block="设置巡线传感器高度"
+    //% blockId="HaodaBit_set_height" block="设置巡线传感器高度 %heights"
     //% weight=90
     //% group="Linefollower" weight=50
-    export function Lineheight(): void {
+    export function Lineheight(heights: number): void {
 		
 		
-		i2cWrite(N76E003AT20_ADDRESS, 0x03, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x03, heights);
 		
-		i2cWrite(N76E003AT20_ADDRESS, 0x05, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x05, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x07, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x07, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x09, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x09, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x13, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x13, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x14, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x14, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x19, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x19, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x16, N76E003AT20_DATA1);
+		i2cWrite(N76E003AT20_ADDRESS, 0x16, heights);
 
 
     }
