@@ -929,21 +929,14 @@ namespace test2 {
 		
 		
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x0b, 0x16);
+		i2cWrite(N76E003AT20_ADDRESS, 0x0b, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x0d, 0x16);
+		i2cWrite(N76E003AT20_ADDRESS, 0x0d, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x0f, 0x16);
+		i2cWrite(N76E003AT20_ADDRESS, 0x0f, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x11, 0x16);
-		
-		i2cWrite(N76E003AT20_ADDRESS, 0x0c, 0x08);
+		i2cWrite(N76E003AT20_ADDRESS, 0x11, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x0e, 0x08);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x10, 0x08);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x12, 0x08);
 		
 	/**	
 	let hei = heights/16;
