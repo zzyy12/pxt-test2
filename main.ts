@@ -928,7 +928,16 @@ namespace test2 {
     export function Lineheight(heights: number): void {
 		
 		let hei = heights/16;
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x0b, hei);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x0d, hei);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x0f, hei);
+
+		i2cWrite(N76E003AT20_ADDRESS, 0x11, hei);
 		
+	/**	
 		i2cWrite(N76E003AT20_ADDRESS, 0x03, hei);
 		
 		i2cWrite(N76E003AT20_ADDRESS, 0x05, hei);
@@ -944,7 +953,7 @@ namespace test2 {
 		i2cWrite(N76E003AT20_ADDRESS, 0x19, hei);
 
 		i2cWrite(N76E003AT20_ADDRESS, 0x16, hei);
-
+*/
 
     }
 	
