@@ -203,7 +203,7 @@ namespace test2 {
 	
 	export enum linechoosedb {
         //% block=R1
-        R1 = 0xof,
+        R1 = 0x0f,
         //% block=R2
         R2 = 0x11,
         //% block=L1
