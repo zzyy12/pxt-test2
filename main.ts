@@ -201,6 +201,17 @@ namespace test2 {
         L2 = 0x03
     }
 	
+	export enum linechoosedb {
+        //% block=R1
+        R1 = 0xof,
+        //% block=R2
+        R2 = 0x11,
+        //% block=L1
+        L1 = 0x0d,
+        //% block=L2
+        L2 = 0x0b
+    }
+	
 	export enum Buttondd {
         //% block=0
         IR_BUTTON_0 = 0x0d,
@@ -922,39 +933,36 @@ namespace test2 {
     }
 	
 	/***/
-    //% blockId="HaodaBit_set_height" block="设置巡线传感器高度 |%heights"
+    //% blockId="HaodaBit_set_height" block="设置巡线传感器|%pn|高度值|%heights"
     //% weight=90
     //% group="Linefollower" weight=50
-    export function Lineheight(heights: number): void {
+    export function Lineheight(pn: linechoosedb, heights: number): void {
 		
 		
 /**	
-		i2cWrite(N76E003AT20_ADDRESS, 0x0b, heights);
+		
+		
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x03, N76E003AT20_DATA1, N76E003AT20_DATA2);
+		
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x05, N76E003AT20_DATA1, N76E003AT20_DATA2);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x0d, heights);
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x07, N76E003AT20_DATA1, N76E003AT20_DATA2);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x0f, heights);
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x09, N76E003AT20_DATA1, N76E003AT20_DATA2);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x11, heights);
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x13, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x14, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x19, N76E003AT20_DATA1, N76E003AT20_DATA2);
+
+		i2cWrite_1(N76E003AT20_ADDRESS, 0x16, N76E003AT20_DATA1, N76E003AT20_DATA2);
 */
 		
 	
 	
-		i2cWrite(N76E003AT20_ADDRESS, 0x03, 0x16);
-		
-		i2cWrite(N76E003AT20_ADDRESS, 0x05, 0x16);
+		i2cWrite(N76E003AT20_ADDRESS, pn, heights);
 
-		i2cWrite(N76E003AT20_ADDRESS, 0x07, 0x16);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x09, 0x16);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x13, 0x16);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x14, 0x16);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x19, 0x16);
-
-		i2cWrite(N76E003AT20_ADDRESS, 0x16, 0x16);
 
 
     }
